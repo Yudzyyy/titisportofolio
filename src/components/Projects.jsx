@@ -1,13 +1,14 @@
 import ProjectCard from "./ProjectCard";
 
+// WEB PROJECT IMAGES
 import solarImg from "../assets/projects/solar.png";
 import kknImg from "../assets/projects/kkn.png";
 import lppImg from "../assets/projects/lpp.png";
 import bootcampImg from "../assets/projects/bootcamp.png";
 import netcompImg from "../assets/projects/netcomp.png";
 
+// SECURITY PROJECT IMAGE
 import seedlabsImg from "../assets/projects/seedlabs.png";
-import networkImg from "../assets/projects/network.png";
 
 export default function Projects() {
   const webProjects = [
@@ -60,7 +61,7 @@ export default function Projects() {
       ],
     },
     {
-      title: "Netcomp Website",
+      title: "Netcomp Website (National Networking Competition)",
       image: netcompImg,
       description: "Official competition website for Netcomp event.",
       contribution: [
@@ -75,23 +76,13 @@ export default function Projects() {
     {
       title: "SeedLabs – Network Security",
       image: seedlabsImg,
+      link: "https://github.com/Yudzyyy/Seedlabs-Practice",
       description:
-        "Hands-on network security labs covering packet sniffing, spoofing, and TCP attacks.",
+        "Hands-on network security labs covering packet sniffing, spoofing, and TCP attacks using Linux-based environments.",
       contribution: [
         "Performed ARP spoofing and packet sniffing attacks",
         "Analyzed TCP session hijacking scenarios",
         "Documented attack methods and mitigation techniques",
-      ],
-    },
-    {
-      title: "Network Traffic Analysis",
-      image: networkImg,
-      description:
-        "Network traffic analysis using Wireshark to identify anomalies and attack patterns.",
-      contribution: [
-        "Captured and analyzed TCP/UDP packets",
-        "Identified suspicious traffic behavior",
-        "Created traffic analysis reports",
       ],
     },
   ];
