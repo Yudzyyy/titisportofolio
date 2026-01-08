@@ -62,11 +62,11 @@ export default function About() {
               </span>
               ,{" "}
               <span className="font-medium text-slate-900">
-                Internet of Things (IoT)
+                cybersecurity
               </span>
               ,{" "}
               <span className="font-medium text-slate-900">
-                network security
+                networking
               </span>
               , and{" "}
               <span className="font-medium text-slate-900">
@@ -95,7 +95,7 @@ export default function About() {
               <div className="p-4 rounded-xl bg-white border border-slate-200">
                 <p className="font-medium text-slate-900">Focus</p>
                 <p className="text-slate-600 mt-1">
-                  Web · IoT · Network
+                  Web · Cybersecurity · Network
                 </p>
               </div>
             </div>
