@@ -6,7 +6,6 @@ import Link from "next/link";
 import { ArrowRight, Award, Github, Layers } from "lucide-react";
 import BentoCard from "@/components/ui/BentoCard";
 import LiveStatusTile from "./LiveStatusTile";
-import { cn } from "@/lib/utils";
 import { CERTIFICATIONS, TECH_STACK, FEATURED_PROJECT } from "@/lib/constants";
 import { GitHubCalendar } from 'react-github-calendar';
 

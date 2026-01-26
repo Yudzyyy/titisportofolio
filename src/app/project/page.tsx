@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, ExternalLink, Github, Network, Server, Code, Zap } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -242,7 +241,20 @@ export default function ProjectPage() {
     );
 }
 
-function ProjectCard({ project, index, hoveredProject, setHoveredProject }: { project: any, index: number, hoveredProject: string | null, setHoveredProject: (id: string | null) => void }) {
+interface Project {
+    id: string;
+    title: string;
+    description: string;
+    category: string;
+    tags: string[];
+    image: string;
+    url: string;
+    github: string | null;
+    demo: string | null;
+    featured: boolean;
+}
+
+function ProjectCard({ project, index, hoveredProject, setHoveredProject }: { project: Project, index: number, hoveredProject: string | null, setHoveredProject: (id: string | null) => void }) {
     const getGradient = (category: string) => {
         switch (category) {
             case "IoT": return "from-emerald-500/10 via-emerald-500/5 to-transparent";
@@ -318,7 +330,7 @@ function ProjectCard({ project, index, hoveredProject, setHoveredProject }: { pr
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-6">
-                        {project.tags.slice(0, 4).map((tag: any) => (
+                        {project.tags.slice(0, 4).map((tag: string) => (
                             <span
                                 key={tag}
                                 className="text-[10px] font-mono bg-muted/50 px-2 py-1 rounded uppercase border border-border/50"

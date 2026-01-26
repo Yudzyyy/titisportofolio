@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Network, Code, Server, Cloud, Award, Mail, Github, Linkedin, Phone } from "lucide-react";
 import { CERTIFICATIONS, TECH_STACK } from "@/lib/constants";
 
@@ -25,11 +26,12 @@ export default function AboutPage() {
                     >
                         <div className="inline-block mb-6">
                         <div className="relative w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-emerald-500/20 to-blue-500/20 p-1">
-                            <div className="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center overflow-hidden">
-                            <img
+                            <div className="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center overflow-hidden relative">
+                            <Image
                                 src="/fotosaya.jpg"
                                 alt="Foto Saya"
-                                className="w-full h-full object-cover"
+                                fill
+                                className="object-cover"
                             />
                             </div>
                         </div>

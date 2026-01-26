@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, Users, Calendar, MapPin, ExternalLink } from "lucide-react";
+import { Briefcase, Users } from "lucide-react";
 
 const workExperience = [
     {
@@ -15,7 +15,7 @@ const workExperience = [
         ]
     },
     {
-        title: "IT Fullstack Intern",
+        title: "IT Fullstack Intern ",
         company: "Badan Pemeriksa Keuangan RI (DIY)",
         period: "Jun 2025 – Aug 2025",
         description: [
@@ -117,7 +117,14 @@ export default function ExperiencePage() {
     );
 }
 
-function ExperienceItem({ exp, index }: { exp: any, index: number }) {
+interface Experience {
+    title: string;
+    company: string;
+    period: string;
+    description: string[];
+}
+
+function ExperienceItem({ exp, index }: { exp: Experience, index: number }) {
     return (
         <motion.div
             initial={{ opacity: 0, x: -20 }}

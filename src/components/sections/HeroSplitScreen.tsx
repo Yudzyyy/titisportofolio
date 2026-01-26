@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Network, Code, ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/useMediaQuery";
 
 export default function HeroSplitScreen() {

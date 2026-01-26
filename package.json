@@ -8,9 +8,6 @@
     "start": "next start",
     "lint": "eslint",
     "type-check": "tsc --noEmit",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
     "lighthouse": "lhci autorun",
     "deploy:vercel": "vercel --prod",
     "deploy:self-hosted": "docker build -t porto-gravity . && docker run -p 3000:3000 porto-gravity"
