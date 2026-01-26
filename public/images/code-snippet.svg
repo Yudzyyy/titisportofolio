@@ -1,0 +1,7 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="400" fill="#0f172a" />
+  <text x="20" y="40" fill="#0088ff" font-family="monospace" font-size="14">function automate() {</text>
+  <text x="40" y="70" fill="#ffffff" font-family="monospace" font-size="14">  const infra = new Cloud();</text>
+  <text x="40" y="100" fill="#ffffff" font-family="monospace" font-size="14">  infra.deploy();</text>
+  <text x="20" y="130" fill="#0088ff" font-family="monospace" font-size="14">}</text>
+</svg>
