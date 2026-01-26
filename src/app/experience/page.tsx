@@ -3,7 +3,17 @@
 import { motion } from "framer-motion";
 import { Briefcase, Users } from "lucide-react";
 
-const workExperience = [
+/**
+ * Interface representing a single work or organizational experience item.
+ */
+interface Experience {
+    title: string;
+    company: string;
+    period: string;
+    description: string[];
+}
+
+const workExperience: Experience[] = [
     {
         title: "Assistant Laboratory – Basic Computer Engineering Lab (Part-time)",
         company: "Sekolah Vokasi Universitas Gadjah Mada",
@@ -45,7 +55,7 @@ const workExperience = [
     }
 ];
 
-const organizations = [
+const organizations: Experience[] = [
     {
         title: "Vice Chairman",
         company: "National Networking Competition (Netcomp)",
@@ -90,11 +100,11 @@ export default function ExperiencePage() {
                     <div className="mb-20">
                         <div className="flex items-center gap-3 mb-8">
                             <Briefcase className="h-8 w-8 text-primary" />
-                            <h2 className="text-3xl font-black font-mono tracking-tighter">Pengalaman Kerja</h2>
+                            <h2 className="text-3xl font-black font-mono tracking-tighter uppercase">Pengalaman Kerja</h2>
                         </div>
                         <div className="space-y-12">
                             {workExperience.map((exp, idx) => (
-                                <ExperienceItem key={idx} exp={exp} index={idx} />
+                                <ExperienceItem key={`work-${idx}`} exp={exp} index={idx} />
                             ))}
                         </div>
                     </div>
@@ -103,11 +113,11 @@ export default function ExperiencePage() {
                     <div className="pb-20">
                         <div className="flex items-center gap-3 mb-8">
                             <Users className="h-8 w-8 text-primary" />
-                            <h2 className="text-3xl font-black font-mono tracking-tighter">Organisasi</h2>
+                            <h2 className="text-3xl font-black font-mono tracking-tighter uppercase">Organisasi</h2>
                         </div>
                         <div className="space-y-12">
                             {organizations.map((exp, idx) => (
-                                <ExperienceItem key={idx} exp={exp} index={idx} />
+                                <ExperienceItem key={`org-${idx}`} exp={exp} index={idx} />
                             ))}
                         </div>
                     </div>
@@ -115,13 +125,6 @@ export default function ExperiencePage() {
             </section>
         </div>
     );
-}
-
-interface Experience {
-    title: string;
-    company: string;
-    period: string;
-    description: string[];
 }
 
 function ExperienceItem({ exp, index }: { exp: Experience, index: number }) {
@@ -147,7 +150,7 @@ function ExperienceItem({ exp, index }: { exp: Experience, index: number }) {
             </div>
             <ul className="space-y-2">
                 {exp.description.map((item: string, i: number) => (
-                    <li key={i} className="text-muted-foreground flex items-start gap-2">
+                    <li key={`desc-${i}`} className="text-muted-foreground flex items-start gap-2">
                         <span className="text-primary mt-1.5">•</span>
                         <span>{item}</span>
                     </li>

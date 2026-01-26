@@ -6,7 +6,23 @@ import { ArrowRight, ExternalLink, Github, Network, Server, Code, Zap } from "lu
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-const projects = [
+/**
+ * Interface representing a single project item.
+ */
+interface Project {
+    id: string;
+    title: string;
+    description: string;
+    category: string;
+    tags: string[];
+    image: string;
+    url: string;
+    github: string | null;
+    demo: string | null;
+    featured: boolean;
+}
+
+const projects: Project[] = [
     {
         id: "solar-panel-iot",
         title: "Solar Panel Monitoring System",
@@ -241,19 +257,6 @@ export default function ProjectPage() {
     );
 }
 
-interface Project {
-    id: string;
-    title: string;
-    description: string;
-    category: string;
-    tags: string[];
-    image: string;
-    url: string;
-    github: string | null;
-    demo: string | null;
-    featured: boolean;
-}
-
 function ProjectCard({ project, index, hoveredProject, setHoveredProject }: { project: Project, index: number, hoveredProject: string | null, setHoveredProject: (id: string | null) => void }) {
     const getGradient = (category: string) => {
         switch (category) {
@@ -332,7 +335,7 @@ function ProjectCard({ project, index, hoveredProject, setHoveredProject }: { pr
                     <div className="flex flex-wrap gap-2 mb-6">
                         {project.tags.slice(0, 4).map((tag: string) => (
                             <span
-                                key={tag}
+                                key={`${project.id}-${tag}`}
                                 className="text-[10px] font-mono bg-muted/50 px-2 py-1 rounded uppercase border border-border/50"
                             >
                                 {tag}
