@@ -68,7 +68,7 @@ const projects: Project[] = [
         description: "Hands-on network security labs covering packet sniffing, spoofing, and TCP attacks.",
         category: "Security",
         tags: ["Security", "Linux", "Networking", "SeedLabs"],
-        url: "https://github.com/Yudzyyy/Seedlabs-Practice",
+        url: "/project/seedlabs",
         github: "https://github.com/Yudzyyy/Seedlabs-Practice",
         featured: true,
     },
@@ -78,7 +78,7 @@ const projects: Project[] = [
         description: "Implemented a private CI/CD server on Ubuntu VPS using Gitea, NGINX reverse proxy, and GoAccess for real-time monitoring.",
         category: "DevOps",
         tags: ["Gitea", "NGINX", "Ubuntu", "GoAccess", "CI/CD"],
-        url: "#",
+        url: "/project/cicd-server",
         featured: false,
     },
     {
@@ -87,7 +87,7 @@ const projects: Project[] = [
         description: "Designed a redundant hierarchical network infrastructure for Data Center rack expansion, including physical topology, VLAN logical mapping, and Bill of Materials (RAB).",
         category: "Networking",
         tags: ["Network Design", "Mikrotik CCR", "Dell Networking", "VLAN", "RAB"],
-        url: "#",
+        url: "/project/network-design",
         featured: false,
     },
     {
@@ -96,7 +96,7 @@ const projects: Project[] = [
         description: "Designing FTTH (Fiber to the Home) infrastructure in Sumedang area utilizing Atoll for radio planning and OptiSystem for optical link budget analysis.",
         category: "Networking",
         tags: ["FTTH", "Atoll", "OptiSystem", "Fiber Optics"],
-        url: "#",
+        url: "/project/ftth-design",
         featured: false,
     },
     {

@@ -74,7 +74,7 @@ export default function HeroSplitScreen() {
                         <Network className="h-10 w-10 text-emerald-400" />
                     </motion.div>
 
-                    <h2 className="text-4xl font-black font-mono tracking-tighter text-foreground md:text-7xl uppercase">
+                    <h2 className="text-4xl font-black font-mono tracking-tighter text-white md:text-7xl uppercase">
                         Net<span className="text-emerald-600 dark:text-emerald-500 italic">Work</span>
                     </h2>
 
@@ -84,7 +84,7 @@ export default function HeroSplitScreen() {
                                 initial={{ opacity: 0, y: 15 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -10 }}
-                                className="mt-6 max-w-sm text-lg md:text-xl text-emerald-900/70 dark:text-emerald-100/70 font-medium leading-relaxed"
+                                className="mt-6 max-w-sm text-lg md:text-xl text-emerald-100/70 font-medium leading-relaxed"
                             >
                                 I configure the network where your code runs.
                             </motion.p>

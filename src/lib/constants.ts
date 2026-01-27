@@ -59,7 +59,7 @@ export const TECH_STACK = {
 export const FEATURED_PROJECT = {
     title: "Solar Panel Monitoring System",
     description: "A web-based monitoring system to observe solar panel performance in real-time using IoT sensors and MQTT protocol.",
-    image: "/images/network-infrastructure.svg",
+    image: "/images/solar.jpg",
     caseStudyUrl: "/project/solar-panel",
 };
 

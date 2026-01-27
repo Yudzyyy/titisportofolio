@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, ExternalLink, Github, Network, Server, Code, Zap } from "lucide-react";
 import { useState } from "react";
@@ -13,6 +13,7 @@ interface Project {
     id: string;
     title: string;
     description: string;
+    fullDescription: string;
     category: string;
     tags: string[];
     image: string;
@@ -27,9 +28,10 @@ const projects: Project[] = [
         id: "solar-panel-iot",
         title: "Solar Panel Monitoring System",
         description: "A web-based monitoring system to observe solar panel performance in real-time.",
+        fullDescription: "This system is an intelligent IoT platform designed to monitor residential solar panel performance in real-time. It automates the collection of telemetry data—specifically power output, load consumption, and battery health—and transmits this information to a centralized dashboard for live visualization and historical performance analysis.",
         category: "IoT",
         tags: ["ESP32", "MQTT", "Next.js", "IoT"],
-        image: "/images/network-topology.svg",
+        image: "/images/solar.jpg",
         url: "/project/solar-panel",
         github: "https://github.com/Yudzyyy/solarpanelcleaner_iot",
         demo: null,
@@ -39,6 +41,7 @@ const projects: Project[] = [
         id: "kkn-website",
         title: "KKN Team Website",
         description: "Village information website developed during KKN for digitalization support.",
+        fullDescription: "A digital information portal developed to support village digitalization in Komodo area. It serves as a community hub for local information, tourism promotion, and administrative updates, built with a focus on accessibility and low-bandwidth performance.",
         category: "Web",
         tags: ["Web Development", "Digitalization", "Community"],
         image: "/images/code-snippet.svg",
@@ -51,6 +54,7 @@ const projects: Project[] = [
         id: "karangtaruna-website",
         title: "LPP Karangtaruna Website",
         description: "Institutional website for LPP Karangtaruna featuring organizational programs and news.",
+        fullDescription: "Official organizational website for LPP Karangtaruna, featuring member management and news distribution. It was designed to improve communication within the organization and provide a public face for their community programs, using React for a dynamic user experience.",
         category: "Web",
         tags: ["Web Development", "Organization", "React"],
         image: "/images/code-snippet.svg",
@@ -63,6 +67,7 @@ const projects: Project[] = [
         id: "komdigi-bootcamp",
         title: "Bootcamp Komdigi Jogja – Java",
         description: "Java programming bootcamp project focusing on backend logic and OOP.",
+        fullDescription: "Backend system developed during an intensive Java bootcamp focusing on Object-Oriented Programming (OOP) principles. The project involved building a robust logic layer for handling complex data structures and business workflows in a scalable manner.",
         category: "Web",
         tags: ["Java", "OOP", "Backend", "Bootcamp"],
         image: "/images/code-snippet.svg",
@@ -75,6 +80,7 @@ const projects: Project[] = [
         id: "netcomp-website",
         title: "Netcomp Official Website",
         description: "Official competition website for National Networking Competition (Netcomp) event.",
+        fullDescription: "A WordPress-based event management website for a national-scale networking competition. It handled contestant registrations, event schedules, and live updates, requiring high availability and integration with payment gateways.",
         category: "Web",
         tags: ["Networking", "Competition", "WordPress"],
         image: "/images/network-topology.svg",
@@ -87,10 +93,11 @@ const projects: Project[] = [
         id: "seedlabs-security",
         title: "SeedLabs – Network Security",
         description: "Hands-on network security labs covering packet sniffing, spoofing, and TCP attacks.",
+        fullDescription: "This project consists of a series of technical laboratory modules focused on identifying and mitigating network security vulnerabilities. It covers practical scenarios including packet sniffing, ARP spoofing, TCP session hijacking, and DNS cache poisoning, providing deep insights into network protocol exploitation.",
         category: "Security",
         tags: ["Security", "Linux", "Networking", "SeedLabs"],
         image: "/images/network-topology.svg",
-        url: "https://github.com/Yudzyyy/Seedlabs-Practice",
+        url: "/project/seedlabs",
         github: "https://github.com/Yudzyyy/Seedlabs-Practice",
         demo: null,
         featured: true,
@@ -99,10 +106,11 @@ const projects: Project[] = [
         id: "private-cicd-server",
         title: "Private CI/CD Server Implementation",
         description: "Implemented a private CI/CD server on Ubuntu VPS using Gitea, NGINX reverse proxy, and GoAccess for real-time monitoring.",
+        fullDescription: "This project is a self-hosted (private) CI/CD infrastructure designed to manage internal Git repositories and automate application deployment workflows. It provides a centralized platform for code versioning, automated builds, and real-time server performance monitoring.",
         category: "DevOps",
         tags: ["Gitea", "NGINX", "Ubuntu", "GoAccess", "CI/CD"],
         image: "/images/code-snippet.svg",
-        url: "#",
+        url: "/project/cicd-server",
         github: null,
         demo: null,
         featured: false,
@@ -111,10 +119,11 @@ const projects: Project[] = [
         id: "network-design-cumulonimbus",
         title: "Data Center Network Design",
         description: "Designed a redundant hierarchical network infrastructure for Data Center rack expansion at Perusahaan Cumulonimbus, including physical topology, VLAN logical mapping, and Bill of Materials (RAB).",
+        fullDescription: "This project is a detailed technical design of a redundant hierarchical network infrastructure for a Data Center rack expansion. It covers the physical topology design, logical VLAN mapping, and a comprehensive Bill of Materials (RAB) to support high-density server environments.",
         category: "Networking",
         tags: ["Network Design", "Mikrotik CCR", "Dell Networking", "VLAN", "RAB"],
         image: "/images/network-topology.svg",
-        url: "#",
+        url: "/project/network-design",
         github: null,
         demo: null,
         featured: false,
@@ -123,10 +132,11 @@ const projects: Project[] = [
         id: "ftth-design-sumedang",
         title: "FTTH Network Design (Sumedang)",
         description: "Designing FTTH (Fiber to the Home) infrastructure in Sumedang area utilizing Atoll for radio planning and OptiSystem for optical link budget analysis.",
+        fullDescription: "This project involves the planning and design of a Fiber-To-The-Home (FTTH) network infrastructure for residential areas in Sumedang. It utilizes high-capacity optical link planning to deliver broadband internet via Gigabit Passive Optical Network (GPON) technology.",
         category: "Networking",
         tags: ["FTTH", "Atoll", "OptiSystem", "Fiber Optics"],
         image: "/images/network-topology.svg",
-        url: "#",
+        url: "/project/ftth-design",
         github: null,
         demo: null,
         featured: false,
@@ -135,6 +145,7 @@ const projects: Project[] = [
         id: "broadband-network-lab",
         title: "Broadband Network Labs (Optic & Splicing)",
         description: "Hands-on experience with broadband networking including fiber optic fusion splicing, OPM measurements, and OTDR troubleshooting.",
+        fullDescription: "Comprehensive hands-on experience in broadband network maintenance, focusing on fiber optic technologies. Includes practical work with fusion splicing, optical power measurements, and fault detection using OTDR in a laboratory environment.",
         category: "Networking",
         tags: ["Splicing", "Broadband", "Fiber Optic", "Network Lab"],
         image: "/images/network-topology.svg",
@@ -150,6 +161,7 @@ const categories = ["All", "Web", "IoT", "Security", "Networking", "DevOps"];
 export default function ProjectPage() {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+    const [activeProject, setActiveProject] = useState<Project | null>(null);
 
     const filteredProjects = selectedCategory === "All"
         ? projects
@@ -212,7 +224,7 @@ export default function ProjectPage() {
                                 </div>
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {networkIofProjects.map((project, idx) => (
-                                        <ProjectCard key={project.id} project={project} index={idx} hoveredProject={hoveredProject} setHoveredProject={setHoveredProject} />
+                                        <ProjectCard key={project.id} project={project} index={idx} hoveredProject={hoveredProject} setHoveredProject={setHoveredProject} onVisit={setActiveProject} />
                                     ))}
                                 </div>
                             </div>
@@ -225,7 +237,7 @@ export default function ProjectPage() {
                                 </div>
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {webProjects.map((project, idx) => (
-                                        <ProjectCard key={project.id} project={project} index={idx} hoveredProject={hoveredProject} setHoveredProject={setHoveredProject} />
+                                        <ProjectCard key={project.id} project={project} index={idx} hoveredProject={hoveredProject} setHoveredProject={setHoveredProject} onVisit={setActiveProject} />
                                     ))}
                                 </div>
                             </div>
@@ -236,7 +248,7 @@ export default function ProjectPage() {
                             className="grid md:grid-cols-2 gap-6"
                         >
                             {filteredProjects.map((project, idx) => (
-                                <ProjectCard key={project.id} project={project} index={idx} hoveredProject={hoveredProject} setHoveredProject={setHoveredProject} />
+                                <ProjectCard key={project.id} project={project} index={idx} hoveredProject={hoveredProject} setHoveredProject={setHoveredProject} onVisit={setActiveProject} />
                             ))}
                         </motion.div>
                     )}
@@ -253,11 +265,64 @@ export default function ProjectPage() {
                     )}
                 </div>
             </section>
+
+            {/* Project Preview Modal */}
+            <AnimatePresence>
+                {activeProject && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setActiveProject(null)}
+                            className="absolute inset-0 bg-background/80 backdrop-blur-md"
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            className="relative w-full max-w-2xl bg-card border border-border rounded-3xl overflow-hidden shadow-2xl"
+                        >
+                            <div className="p-8 md:p-12">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <span className="text-xs font-mono text-primary font-bold tracking-widest uppercase">Project Spotlight</span>
+                                    <div className="h-[1px] flex-1 bg-border" />
+                                </div>
+                                <h2 className="text-3xl md:text-4xl font-black font-mono tracking-tighter mb-6">{activeProject.title}</h2>
+                                <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                                    {activeProject.fullDescription}
+                                </p>
+                                <div className="flex flex-wrap gap-2 mb-10">
+                                    {activeProject.tags.map(tag => (
+                                        <span key={tag} className="text-[10px] font-mono bg-muted px-2 py-1 rounded uppercase">{tag}</span>
+                                    ))}
+                                </div>
+                                <div className="flex flex-wrap items-center gap-4">
+                                    <Link
+                                        href={activeProject.url}
+                                        className="flex-1 flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 hover:opacity-90 transition-all border border-transparent"
+                                        onClick={() => setActiveProject(null)}
+                                    >
+                                        {activeProject.url.startsWith('http') ? 'Visit Live Site' : 'View Case Study'}
+                                        <ArrowRight size={18} />
+                                    </Link>
+                                    <button
+                                        onClick={() => setActiveProject(null)}
+                                        className="px-8 py-4 text-sm font-bold font-mono text-muted-foreground hover:text-foreground transition-colors"
+                                    >
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }
 
-function ProjectCard({ project, index, hoveredProject, setHoveredProject }: { project: Project, index: number, hoveredProject: string | null, setHoveredProject: (id: string | null) => void }) {
+function ProjectCard({ project, index, hoveredProject, setHoveredProject, onVisit }: { project: Project, index: number, hoveredProject: string | null, setHoveredProject: (id: string | null) => void, onVisit: (p: Project) => void }) {
     const getGradient = (category: string) => {
         switch (category) {
             case "IoT": return "from-emerald-500/10 via-emerald-500/5 to-transparent";
@@ -291,11 +356,11 @@ function ProjectCard({ project, index, hoveredProject, setHoveredProject }: { pr
             className="group relative h-full"
         >
             <div className="relative h-full rounded-2xl border border-border bg-card/30 overflow-hidden hover:border-primary/50 transition-all backdrop-blur-sm flex flex-col">
-                {/* Main Link Overlay */}
-                <Link 
-                    href={project.url} 
-                    className="absolute inset-0 z-10"
-                    aria-label={`View ${project.title}`}
+                {/* Main Link Overlay changed to trigger modal */}
+                <button 
+                    onClick={() => onVisit(project)}
+                    className="absolute inset-0 z-10 w-full h-full appearance-none bg-transparent border-none cursor-pointer"
+                    aria-label={`View summary for ${project.title}`}
                 />
 
                 {/* Category Gradient Background */}
