@@ -1,4 +1,4 @@
-import { ArrowLeft, Server, Shield, Globe } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function CicdServerPage() {
@@ -87,7 +87,7 @@ export default function CicdServerPage() {
                         </li>
                         <li className="flex items-center gap-3">
                             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                            <span>Certbot / Let's Encrypt (SSL)</span>
+                            <span>Certbot / Lets Encrypt (SSL)</span>
                         </li>
                     </ul>
                 </div>
