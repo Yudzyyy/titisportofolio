@@ -57,8 +57,8 @@ export const TECH_STACK = {
 };
 
 export const FEATURED_PROJECT = {
-    title: "Solar Panel Monitoring System",
-    description: "A web-based monitoring system to observe solar panel performance in real-time using IoT sensors and MQTT protocol.",
+    title: "Solar Panel Robot Cleaner",
+    description: "An automated cleaning system featuring an ESP8266 robot controlled via Python/React dashboard.",
     image: "/images/solar.jpg",
     caseStudyUrl: "/project/solar-panel",
 };

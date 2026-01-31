@@ -14,13 +14,22 @@ export interface Project {
 
 const projects: Project[] = [
     {
-        id: "solar-panel-iot",
-        title: "Solar Panel Monitoring System",
-        description: "A web-based monitoring system to observe solar panel performance in real-time.",
+        id: "solar-panel-robot",
+        title: "Solar Panel Robot Cleaner",
+        description: "An automated cleaning system for solar panels with ESP8266 robot and Python/React dashboard.",
         category: "IoT",
-        tags: ["ESP32", "MQTT", "Next.js", "IoT"],
+        tags: ["ESP8266", "Python", "React", "MQTT", "IoT"],
         url: "/project/solar-panel",
         github: "https://github.com/Yudzyyy/solarpanelcleaner_iot",
+        featured: true,
+    },
+    {
+        id: "flood-monitoring-iot",
+        title: "IoT Flood Monitoring System",
+        description: "Real-time water level monitoring for flood anticipation, integrated with Server Technology principles.",
+        category: "IoT",
+        tags: ["ESP8266", "Ultrasonic", "Server Tech", "MQTT", "IoT"],
+        url: "#",
         featured: true,
     },
     {

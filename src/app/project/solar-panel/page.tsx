@@ -17,10 +17,10 @@ export default function SolarPanelPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
                 <div>
                     <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-6">
-                        Solar Panel <span className="text-emerald-500">IoT</span>
+                        Solar Panel <span className="text-emerald-500">Robot Cleaner</span>
                     </h1>
                     <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-                        An intelligent monitoring system for residential solar panels, featuring real-time data ingestion via MQTT and a comprehensive analytics dashboard.
+                        An automated cleaning system for solar panels featuring an ESP8266-powered robot with real-time control via Python (Flask) and a React dashboard.
                     </p>
 
                     <div className="flex flex-wrap gap-4">
@@ -37,17 +37,17 @@ export default function SolarPanelPage() {
 
                 <div className="grid grid-cols-2 gap-4">
                     <div className="rounded-xl border border-border p-6 bg-card/50">
-                        <h4 className="text-xs font-mono text-muted-foreground uppercase mb-2">Power Monitored</h4>
-                        <p className="text-3xl font-black">2.4 <span className="text-sm font-normal text-muted-foreground">kW/h</span></p>
+                        <h4 className="text-xs font-mono text-muted-foreground uppercase mb-2">Robot Brain</h4>
+                        <p className="text-3xl font-black">ESP8266</p>
                     </div>
                     <div className="rounded-xl border border-border p-6 bg-card/50">
-                        <h4 className="text-xs font-mono text-muted-foreground uppercase mb-2">Alert Status</h4>
-                        <p className="text-3xl font-black text-emerald-500">Healthy</p>
+                        <h4 className="text-xs font-mono text-muted-foreground uppercase mb-2">Communication</h4>
+                        <p className="text-3xl font-black text-emerald-500">MQTT & WS</p>
                     </div>
                     <div className="rounded-xl border border-border p-6 bg-card/50 col-span-2">
                         <h4 className="text-xs font-mono text-muted-foreground uppercase mb-2">Key Tech</h4>
                         <div className="flex flex-wrap gap-2 mt-2">
-                            {['ESP32', 'MQTT', 'Laravel', 'Next.js', 'PostgreSQL', 'Docker'].map(t => (
+                            {['ESP8266', 'Python', 'Flask', 'React', 'MQTT', 'Docker'].map(t => (
                                 <span key={t} className="text-[10px] font-mono bg-muted px-2 py-1 rounded uppercase">{t}</span>
                             ))}
                         </div>
@@ -72,22 +72,48 @@ export default function SolarPanelPage() {
                 <div className="space-y-4">
                     <h2 className="text-2xl font-mono font-bold uppercase tracking-tight text-primary">01. What This Project Does</h2>
                     <p className="text-muted-foreground leading-relaxed">
-                        This system is an intelligent IoT platform designed to monitor residential solar panel performance in real-time. It automates the collection of telemetry data—specifically power output, load consumption, and battery health—and transmits this information to a centralized dashboard for live visualization and historical performance analysis.
+                        This project is an automated cleaning system for solar panels. It consists of a physical robot controlled via a web interface. The robot moves across the panel surface to remove dust and debris, maximizing energy efficiency. Users can start the cleaning process, monitor real-time progress, and receive status updates through a dedicated dashboard.
                     </p>
                 </div>
 
                 <div className="space-y-4">
-                    <h2 className="text-2xl font-mono font-bold uppercase tracking-tight text-primary">02. Why It Was Built</h2>
-                    <p className="text-muted-foreground leading-relaxed">
-                        Residential solar installations often lack granular monitoring tools, making it difficult to detect efficiency drops or hardware malfunctions. This project addresses the need for a scalable, low-latency monitoring solution that handles intermittent hardware connectivity while providing users with actionable data to optimize energy usage and identify maintenance needs.
-                    </p>
+                    <h2 className="text-2xl font-mono font-bold uppercase tracking-tight text-primary">02. Hardware Components (Robot)</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                            <h3 className="font-bold text-foreground">Core Brain</h3>
+                            <p className="text-sm text-muted-foreground">ESP8266 microcontroller with built-in WiFi for MQTT communication.</p>
+                        </div>
+                        <div className="space-y-2">
+                            <h3 className="font-bold text-foreground">Actors</h3>
+                            <p className="text-sm text-muted-foreground">L298N Motor Driver, High-torque DC Motors, and a specialized Water Pump.</p>
+                        </div>
+                        <div className="space-y-2">
+                            <h3 className="font-bold text-foreground">Sensors</h3>
+                            <p className="text-sm text-muted-foreground">Top and Bottom Limit Switches for precise movement boundaries.</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="space-y-4">
-                    <h2 className="text-2xl font-mono font-bold uppercase tracking-tight text-primary">03. How It Works (High-Level)</h2>
-                    <p className="text-muted-foreground leading-relaxed">
-                        The system utilizes a decoupled architecture with three main tiers: an ESP32 microcontroller layer for sensor data acquisition, an MQTT broker for asynchronous messaging, and a dual-framework backend for processing and display. ESP32 nodes publish telemetry via MQTT; a backend service subscribes to these topics for data persistence in a PostgreSQL database, while the Next.js frontend delivers a real-time responsive dashboard interface.
-                    </p>
+                    <h2 className="text-2xl font-mono font-bold uppercase tracking-tight text-primary">03. Communication Workflow</h2>
+                    <div className="space-y-6 text-muted-foreground">
+                        <div>
+                            <h3 className="font-bold text-foreground mb-2 flex items-center gap-2">
+                                <span className="h-2 w-2 rounded-full bg-blue-500" /> Web ↔ Backend (WebSocket)
+                            </h3>
+                            <p className="text-sm leading-relaxed">
+                                Real-time bidirectional communication between the React frontend and Python backend. Handles command execution and provides instant progress updates (e.g., P:1%, P:2%) to the user interface.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 className="font-bold text-foreground mb-2 flex items-center gap-2">
+                                <span className="h-2 w-2 rounded-full bg-emerald-500" /> Backend ↔ Robot (MQTT)
+                            </h3>
+                            <p className="text-sm leading-relaxed">
+                                Asynchronous messaging via Mosquitto Broker. The backend sends movement commands (START, RETURN), while the ESP8266 robot reports its physical status and progress back to the system.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="space-y-4">
@@ -95,23 +121,19 @@ export default function SolarPanelPage() {
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-muted-foreground">
                         <li className="flex items-center gap-3">
                             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                            <span>ESP32 & INA219/PZEM Sensors</span>
+                            <span>React (Vite) & Tailwind CSS</span>
                         </li>
                         <li className="flex items-center gap-3">
                             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                            <span>MQTT Protocol & WebSockets</span>
+                            <span>Python (Flask & Eventlet)</span>
                         </li>
                         <li className="flex items-center gap-3">
                             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                            <span>Laravel & PostgreSQL</span>
+                            <span>MQTT (Mosquitto) & WebSockets</span>
                         </li>
                         <li className="flex items-center gap-3">
                             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                            <span>Next.js 15 & Tailwind CSS</span>
-                        </li>
-                        <li className="flex items-center gap-3">
-                            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                            <span>Docker & GitHub Actions</span>
+                            <span>PostgreSQL & Docker Compose</span>
                         </li>
                     </ul>
                 </div>

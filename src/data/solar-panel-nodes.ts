@@ -11,66 +11,63 @@ export type SolarPanelNode = Node<SolarPanelNodeData>;
 
 export const initialNodes: SolarPanelNode[] = [
     {
-        id: 'sensor',
+        id: 'robot',
         type: 'sensor',
-        position: { x: 0, y: 0 },
+        position: { x: 0, y: 100 },
         data: {
-            label: 'Solar Sensors',
-            description: 'LDR and Voltage sensors to monitor sunlight and energy production.',
-            code: `// Sensor Reading Logic
+            label: 'Arduino Robot (ESP8266)',
+            description: 'Cleaning robot with WiFi connectivity for remote control and status reporting.',
+            code: `// Robot Movement Control
 void loop() {
-  float ldrValue = analogRead(LDR_PIN);
-  float voltage = analogRead(VOLT_PIN) * (5.0 / 1023.0);
-  sendMQTT(ldrValue, voltage);
-  delay(1000);
+  if (MQTT_CMD == "START") {
+    digitalWrite(MOTOR_PIN, HIGH);
+    sendReport("P:1%, MOVING_DOWN");
+  }
 }`,
-            tech: ['ESP32', 'C++', 'Arduino'],
+            tech: ['ESP8266', 'C++', 'L298N', 'Limit Switch'],
         },
     },
     {
         id: 'broker',
         type: 'broker',
-        position: { x: 250, y: 0 },
+        position: { x: 250, y: 100 },
         data: {
-            label: 'MQTT Broker',
-            description: 'Mosquitto broker for lightweight communication.',
+            label: 'Mosquitto Broker',
+            description: 'Central MQTT broker handling message routing between robot and backend.',
             tech: ['Mosquitto', 'MQTT', 'Docker'],
         },
     },
     {
         id: 'backend',
         type: 'backend',
-        position: { x: 500, y: 0 },
+        position: { x: 500, y: 100 },
         data: {
-            label: 'Laravel Backend',
-            description: 'Processing and storing IoT data.',
-            code: `// Data Processing
-public function handle(MqttMessage $message) {
-    $data = json_decode($message->payload);
-    EnergyReading::create([
-        'value' => $data->voltage,
-        'ldr' => $data->ldr
-    ]);
-}`,
-            tech: ['Laravel', 'PHP', 'PostgreSQL'],
+            label: 'Python Backend (Flask)',
+            description: 'Flask & Eventlet server managing business logic and dual-protocol communication.',
+            code: `# Command Forwarding
+@socketio.on('command')
+def handle_command(json):
+    mqtt.publish('robot/cmd', json['action'])
+    emit('status', {'msg': 'Command Sent'})`,
+            tech: ['Python', 'Flask', 'Eventlet', 'PostgreSQL', 'Docker'],
         },
     },
     {
-        id: 'dashboard',
+        id: 'frontend',
         type: 'dashboard',
-        position: { x: 750, y: 0 },
+        position: { x: 750, y: 100 },
         data: {
-            label: 'Dashboard',
-            description: 'Real-time monitoring and visualization.',
-            tech: ['Next.js', 'React', 'Tailwind', 'WebSocket'],
+            label: 'React Frontend (Vite)',
+            description: 'Interactive dashboard using WebSocket for real-time status and control.',
+            tech: ['React', 'Vite', 'Tailwind CSS', 'WebSocket'],
         },
     },
 ];
 
 export const initialEdges: Edge[] = [
     {
-        id: 'e1-2',
-        source: 'sensor',
+        id: 'robot-broker',
+        source: 'robot',
         target: 'broker',
         label: 'MQTT',
         animated: true,
@@ -78,19 +75,21 @@ export const initialEdges: Edge[] = [
         labelStyle: { fill: '#10b981', fontWeight: 700 },
     },
     {
-        id: 'e2-3',
+        id: 'broker-backend',
         source: 'broker',
         target: 'backend',
-        label: 'MQTT/HTTP',
+        label: 'MQTT',
         animated: true,
         style: { stroke: '#3b82f6' },
+        labelStyle: { fill: '#3b82f6', fontWeight: 700 },
     },
     {
-        id: 'e3-4',
+        id: 'backend-frontend',
         source: 'backend',
-        target: 'dashboard',
-        label: 'WebSocket/HTTP',
+        target: 'frontend',
+        label: 'WebSocket',
         animated: true,
         style: { stroke: '#8b5cf6' },
+        labelStyle: { fill: '#8b5cf6', fontWeight: 700 },
     },
 ];
