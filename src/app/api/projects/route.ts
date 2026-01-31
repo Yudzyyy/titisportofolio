@@ -26,10 +26,10 @@ const projects: Project[] = [
     {
         id: "flood-monitoring-iot",
         title: "IoT Flood Monitoring System",
-        description: "Real-time water level monitoring for flood anticipation, integrated with Server Technology principles.",
+        description: "Monitoring ketinggian air otomatis dengan NodeMCU, sensor ultrasonik, dan orkestrasi Kubernetes.",
         category: "IoT",
-        tags: ["ESP8266", "Ultrasonic", "Server Tech", "MQTT", "IoT"],
-        url: "#",
+        tags: ["NodeMCU", "Node.js", "Kubernetes", "MQTT", "IoT"],
+        url: "/project/flood-monitoring",
         featured: true,
     },
     {
