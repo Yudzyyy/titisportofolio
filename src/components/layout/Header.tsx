@@ -34,6 +34,7 @@ export default function Header() {
                         { name: "About", href: "/about" },
                         { name: "Experience", href: "/experience" },
                         { name: "Project", href: "/project" },
+                        { name: "Contact", href: "/contact" },
                     ].map((link) => (
                         <Link
                             key={link.href}
@@ -97,6 +98,7 @@ export default function Header() {
                                 { name: "About", href: "/about" },
                                 { name: "Experience", href: "/experience" },
                                 { name: "Project", href: "/project" },
+                                { name: "Contact", href: "/contact" },
                             ].map((link) => (
                                 <Link
                                     key={link.href}

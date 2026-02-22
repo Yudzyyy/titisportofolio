@@ -15,6 +15,7 @@ export const commands: CommandItem[] = [
     { id: 'nav-about', title: 'About Me', url: '/about', category: 'page' },
     { id: 'nav-experience', title: 'View Experience', url: '/experience', category: 'page' },
     { id: 'nav-project', title: 'View Projects', url: '/project', category: 'page' },
+    { id: 'nav-contact', title: 'Contact Me', url: '/contact', category: 'page' },
 
     // Projects
     {
@@ -102,15 +103,6 @@ export const commands: CommandItem[] = [
         action: () => {
             navigator.clipboard.writeText('titiswahyudiputro2003@mail.ugm.ac.id');
             alert('Email copied to clipboard!');
-        }
-    },
-    {
-        id: 'action-phone',
-        title: 'Copy Phone Number',
-        category: 'action',
-        action: () => {
-            navigator.clipboard.writeText('081339705561');
-            alert('Phone number copied to clipboard!');
         }
     },
     {

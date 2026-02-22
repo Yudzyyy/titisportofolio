@@ -25,6 +25,26 @@ const workExperience: Experience[] = [
         ]
     },
     {
+        title: "Java Fullstack Bootcamp",
+        company: "Komdigi Yogyakarta × Metrodata IT",
+        period: "Oct 2025 – Dec 2025",
+        description: [
+            "Completed intensive fullstack development training focused on Java ecosystem.",
+            "Developed backend services using Spring Boot and relational databases.",
+            "Built responsive frontend applications and integrated them with REST APIs."
+        ]
+    },
+    {
+        title: "Data Scientist Intern (Project-Based)",
+        company: "ID/X Partners × Rakamin Academy (Remote)",
+        period: "Oct 2025 – Nov 2025",
+        description: [
+            "Developed and evaluated multiple machine learning models (Logistic Regression, Random Forest, XGBoost) for credit risk prediction.",
+            "Achieved 97.6% accuracy (AUC 0.957) using XGBoost after comprehensive feature engineering and model validation.",
+            "Identified and eliminated 10 data leakage features, improving model generalizability and production reliability."
+        ]
+    },
+    {
         title: "IT Fullstack Intern ",
         company: "Badan Pemeriksa Keuangan RI (DIY)",
         period: "Jun 2025 – Aug 2025",
@@ -38,9 +58,9 @@ const workExperience: Experience[] = [
         company: "Sekolah Vokasi Universitas Gadjah Mada",
         period: "Feb 2025 – Jun 2025",
         description: [
-            "Supported laboratory sessions related to signal transmission, modulation, and networking fundamentals.",
-            "Prepared and maintained telecommunication laboratory equipment.",
-            "Assisted students through hands-on activities."
+            "Assisted 24 students in mastering concepts of antenna types, digital modulation, and FDM multiplexing.",
+            "Guided hands-on practice with VoIP systems and coaxial cable transmission to enhance practical understanding.",
+            "Supported antenna design simulations using MMANA-GAL, facilitating accurate telecommunications analysis."
         ]
     },
     {
@@ -67,6 +87,16 @@ const organizations: Experience[] = [
         ]
     },
     {
+        title: "Media & Streaming Team",
+        company: "Ramadhan Berkah Mardliyah",
+        period: "Dec 2024 – May 2025",
+        description: [
+            "Designed Instagram feed graphics for event promotion and audience engagement.",
+            "Managed live streaming setup and broadcast operations during events.",
+            "Operated and configured streaming cameras to ensure stable video production."
+        ]
+    },
+    {
         title: "Vice Chairman – Iptek Division",
         company: "Forum Komunikasi Teknologi Rekayasa Internet (Forkom TRI)",
         period: "Nov 2023 – Dec 2024",
@@ -74,7 +104,17 @@ const organizations: Experience[] = [
             "Led technology-focused programs and managed community website.",
             "Coordinated professional certification events for teachers and lecturer"
         ]
-    }
+    },
+    {
+        title: "Media Staff",
+        company: "GAMAFORCE (Gadjah Mada Flying Object Research Center)",
+        period: " Nov 2023 – Nov 2024",
+        description: [
+            "Managed and maintained the official event website using WordPress.",
+            "Designed visual materials for the international team (social media, publications, and promotional assets).",
+            "Assisted in content creation and visual branding strategy."
+        ]
+    },
 ];
 
 export default function ExperiencePage() {
@@ -100,7 +140,7 @@ export default function ExperiencePage() {
                     <div className="mb-20">
                         <div className="flex items-center gap-3 mb-8">
                             <Briefcase className="h-8 w-8 text-primary" />
-                            <h2 className="text-3xl font-black font-mono tracking-tighter uppercase">Pengalaman Kerja</h2>
+                            <h2 className="text-3xl font-black font-mono tracking-tighter uppercase">Work Experience</h2>
                         </div>
                         <div className="space-y-12">
                             {workExperience.map((exp, idx) => (
@@ -113,7 +153,7 @@ export default function ExperiencePage() {
                     <div className="pb-20">
                         <div className="flex items-center gap-3 mb-8">
                             <Users className="h-8 w-8 text-primary" />
-                            <h2 className="text-3xl font-black font-mono tracking-tighter uppercase">Organisasi</h2>
+                            <h2 className="text-3xl font-black font-mono tracking-tighter uppercase">Organizations</h2>
                         </div>
                         <div className="space-y-12">
                             {organizations.map((exp, idx) => (

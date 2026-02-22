@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <body className="antialiased min-h-screen bg-background text-foreground">
+      <body suppressHydrationWarning className="antialiased min-h-screen bg-background text-foreground">
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

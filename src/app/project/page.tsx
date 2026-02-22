@@ -197,7 +197,7 @@ export default function ProjectPage() {
                             My <span className="text-primary italic">Projects</span>
                         </h1>
                         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                            Showcasing my work in infrastructure, security, and web development
+                            Showcasing projects I&apos;ve built during my time on campus
                         </p>
                     </motion.div>
 
