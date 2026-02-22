@@ -1,4 +1,4 @@
-import { ArrowLeft, Github, Terminal } from "lucide-react";
+import { ArrowLeft, Github } from "lucide-react";
 import Link from "next/link";
 
 export default function SeedLabsPage() {

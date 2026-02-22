@@ -1,4 +1,4 @@
-import { ArrowLeft, Network, Layout, FileText } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function NetworkDesignPage() {

@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Github, Linkedin, Send, MapPin, ExternalLink } from "lucide-react";
+import { Mail, Github, Linkedin, Send, MapPin, ExternalLink, type LucideIcon } from "lucide-react";
 
 /**
  * Interface for contact information items.
  */
 interface ContactDetail {
-    icon: any;
+    icon: LucideIcon;
     label: string;
     value: string;
     href: string;
@@ -78,7 +78,7 @@ export default function ContactPage() {
                                 </h2>
                                 
                                 <div className="space-y-6">
-                                    {contactDetails.map((contact, idx) => (
+                                    {contactDetails.map((contact) => (
                                         <a
                                             key={contact.label}
                                             href={contact.href}
