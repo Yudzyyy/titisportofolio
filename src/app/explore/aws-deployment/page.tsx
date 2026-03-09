@@ -6,7 +6,6 @@ import {
     Cloud, 
     Server, 
     Terminal, 
-    Link as LinkIcon, 
     ShieldCheck, 
     Container, 
     Globe,
@@ -18,7 +17,7 @@ import {
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-const Section = ({ id, title, icon: Icon, children, className }: { id?: string; title: string; icon: any; children: React.ReactNode; className?: string }) => (
+const Section = ({ id, title, icon: Icon, children, className }: { id?: string; title: string; icon: React.ElementType; children: React.ReactNode; className?: string }) => (
     <motion.section 
         id={id}
         initial={{ opacity: 0, y: 20 }}
