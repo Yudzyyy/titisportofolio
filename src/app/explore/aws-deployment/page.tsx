@@ -13,15 +13,14 @@ import {
     Cpu,
     ExternalLink,
     CheckCircle2,
-    Code2,
-    Database,
     Lock
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-const Section = ({ title, icon: Icon, children, className }: any) => (
+const Section = ({ id, title, icon: Icon, children, className }: { id?: string; title: string; icon: any; children: React.ReactNode; className?: string }) => (
     <motion.section 
+        id={id}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -53,7 +52,7 @@ const CodeBlock = ({ code, label }: { code: string; label?: string }) => (
     </div>
 );
 
-const Step = ({ number, title, children }: any) => (
+const Step = ({ number, title, children }: { number: string; title: string; children: React.ReactNode }) => (
     <div className="flex gap-4 mb-8">
         <div className="flex-none flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary font-bold text-sm">
             {number}
