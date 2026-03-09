@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Network, Code, ArrowRight } from "lucide-react";
 import { useIsMobile } from "@/hooks/useMediaQuery";
@@ -169,21 +170,23 @@ export default function HeroSplitScreen() {
                     transition={{ duration: 0.4 }}
                     className="pointer-events-auto"
                 >
-                    <motion.button
-                        whileHover={{
-                            scale: 1.05,
-                            boxShadow: "0 0 30px -5px rgba(16, 185, 129, 0.3)"
-                        }}
-                        whileTap={{ scale: 0.95 }}
-                        className="group relative flex items-center gap-3 rounded-xl border-2 border-white/20 bg-black px-8 py-4 text-sm font-black text-white hover:text-emerald-400 transition-all hover:border-emerald-500/50"
-                    >
-                        <span className="relative z-10 flex items-center gap-2">
-                            Explore Convergence <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
-                        </span>
+                    <Link href="/explore">
+                        <motion.button
+                            whileHover={{
+                                scale: 1.05,
+                                boxShadow: "0 0 30px -5px rgba(16, 185, 129, 0.3)"
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                            className="group relative flex items-center gap-3 rounded-xl border-2 border-white/20 bg-black px-8 py-4 text-sm font-black text-white hover:text-emerald-400 transition-all hover:border-emerald-500/50"
+                        >
+                            <span className="relative z-10 flex items-center gap-2">
+                                Explore Convergence <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
+                            </span>
 
-                        {/* Interactive Grid Overlay */}
-                        <div className="absolute inset-0 -z-10 rounded-lg bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:14px_24px] opacity-0 transition-opacity group-hover:opacity-100" />
-                    </motion.button>
+                            {/* Interactive Grid Overlay */}
+                            <div className="absolute inset-0 -z-10 rounded-lg bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:14px_24px] opacity-0 transition-opacity group-hover:opacity-100" />
+                        </motion.button>
+                    </Link>
                 </motion.div>
             </div>
 

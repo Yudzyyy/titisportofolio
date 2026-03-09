@@ -13,6 +13,7 @@ import {
     ArrowRight,
     Mail,
     Home,
+    Compass,
     Briefcase,
     Terminal,
 } from "lucide-react";
@@ -168,6 +169,7 @@ function CommandIcon({ category, id }: { category: string, id: string }) {
     const className = "mr-3 h-4 w-4 shrink-0";
 
     if (id.includes('home')) return <Home className={className} />;
+    if (id.includes('explore')) return <Compass className={className} />;
     if (id.includes('about')) return <Terminal className={className} />;
     if (id.includes('work')) return <Briefcase className={className} />;
     if (id.includes('cv')) return <FileText className={className} />;

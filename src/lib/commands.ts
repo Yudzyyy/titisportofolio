@@ -12,6 +12,8 @@ export interface CommandItem {
 export const commands: CommandItem[] = [
     // Pages
     { id: 'nav-home', title: 'Go to Home', url: '/', category: 'page' },
+    { id: 'nav-explore', title: 'Explore Universe', url: '/explore', category: 'page' },
+    { id: 'nav-aws-guide', title: 'AWS Deployment Guide', url: '/explore/aws-deployment', category: 'page', description: 'Next.js + Docker + Nginx on AWS' },
     { id: 'nav-about', title: 'About Me', url: '/about', category: 'page' },
     { id: 'nav-experience', title: 'View Experience', url: '/experience', category: 'page' },
     { id: 'nav-project', title: 'View Projects', url: '/project', category: 'page' },
