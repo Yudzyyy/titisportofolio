@@ -15,11 +15,13 @@ export const TECH_STACK = {
         { name: "VLAN & NAT", level: 85 },
         { name: "Troubleshooting", level: 90 },
     ],
-    "Cloud & Virtualization": [
-        { name: "Container Networking", level: 70 },
-        { name: "Linux Server Administration", level: 75 },
-        { name: "CI/CD (GitHub Actions / GitLab CI – basic)", level: 65 },
-        { name: "Cloud Fundamentals (AWS/GCP – basic)", level: 60 },
+    "Cloud & DevOps": [
+        { name: "Docker & Containerization", level: 90 },
+        { name: "AWS EC2 & Infrastructure", level: 85 },
+        { name: "Nginx Reverse Proxy", level: 85 },
+        { name: "Linux Server (Ubuntu)", level: 85 },
+        { name: "CI/CD (GitHub Actions)", level: 80 },
+        { name: "SSL/TLS (Certbot)", level: 90 },
     ],
     "Web & App Dev": [
         { name: "React JS", level: 85 },
@@ -57,10 +59,10 @@ export const TECH_STACK = {
 };
 
 export const FEATURED_PROJECT = {
-    title: "Solar Panel Robot Cleaner",
-    description: "An automated cleaning system featuring an ESP8266 robot controlled via Python/React dashboard.",
-    image: "/images/solar.jpg",
-    caseStudyUrl: "/project/solar-panel",
+    title: "Proyek Deployment Cloud",
+    description: "Men-deploy portofolio pribadi menggunakan arsitektur cloud yang siap produksi dengan Docker, AWS EC2, dan Nginx.",
+    image: "/images/aws-deployment-thumbnail.jpg",
+    caseStudyUrl: "/explore/aws-deployment",
 };
 
 export const STATUS_API_URL = "/api/status";

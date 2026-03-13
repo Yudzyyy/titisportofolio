@@ -168,7 +168,7 @@ export default function HeroSplitScreen() {
                         opacity: isMobile && hoveredSide ? 0 : 1
                     }}
                     transition={{ duration: 0.4 }}
-                    className="pointer-events-auto"
+                    className="pointer-events-auto flex flex-col items-center gap-6"
                 >
                     <Link href="/explore">
                         <motion.button
@@ -180,13 +180,22 @@ export default function HeroSplitScreen() {
                             className="group relative flex items-center gap-3 rounded-xl border-2 border-white/20 bg-black px-8 py-4 text-sm font-black text-white hover:text-emerald-400 transition-all hover:border-emerald-500/50"
                         >
                             <span className="relative z-10 flex items-center gap-2">
-                                Explore Convergence <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
+                                Jelajahi Konvergensi <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
                             </span>
 
                             {/* Interactive Grid Overlay */}
                             <div className="absolute inset-0 -z-10 rounded-lg bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:14px_24px] opacity-0 transition-opacity group-hover:opacity-100" />
                         </motion.button>
                     </Link>
+
+                    <motion.p 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.8 }}
+                        className="text-center text-xs md:text-sm font-mono tracking-widest text-muted-foreground/60 uppercase"
+                    >
+                        Tertarik pada <span className="text-emerald-500/80">Infrastruktur Cloud</span>, <span className="text-blue-500/80">DevOps</span>, dan <span className="text-purple-500/80">Sistem Berbasis AI</span>.
+                    </motion.p>
                 </motion.div>
             </div>
 
