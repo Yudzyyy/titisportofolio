@@ -188,14 +188,7 @@ export default function HeroSplitScreen() {
                         </motion.button>
                     </Link>
 
-                    <motion.p 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.8 }}
-                        className="text-center text-xs md:text-sm font-mono tracking-widest text-muted-foreground/60 uppercase"
-                    >
-                        Tertarik pada <span className="text-emerald-500/80">Infrastruktur Cloud</span>, <span className="text-blue-500/80">DevOps</span>, dan <span className="text-purple-500/80">Sistem Berbasis AI</span>.
-                    </motion.p>
+
                 </motion.div>
             </div>
 
