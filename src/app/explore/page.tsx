@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Compass, Globe, Zap, Shield, Code, Cpu } from "lucide-react";
+import { Compass, Globe, Zap, Shield, Code, Cpu, Workflow } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const features = [
@@ -15,6 +15,15 @@ const features = [
         border: "border-blue-500/20",
         href: "/explore/aws-deployment",
         featured: true
+    },
+    {
+        title: "CI/CD Pipeline",
+        description: "Automated GitHub Actions workflow that lints, builds, and deploys to AWS EC2 with Docker on every push.",
+        icon: Workflow,
+        color: "text-emerald-500",
+        bg: "bg-emerald-500/10",
+        border: "border-emerald-500/20",
+        href: "/explore/cicd-pipeline",
     },
     {
         title: "Network Security",
