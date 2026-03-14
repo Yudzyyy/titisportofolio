@@ -83,7 +83,7 @@ const items: ExploreItem[] = [
     {
         id: "iot-solar-panel",
         title: "Solar Panel Robot Cleaner",
-        description: "Automated solar panel cleaning robot with ESP8266, MQTT, WebSocket, Flask, and React dashboard — fully containerized with Docker.",
+        description: "Automated solar panel cleaning robot with ESP8266, MQTT, WebSocket, Flask, and React dashboard — fully containerized and deployed on a local Kubernetes cluster.",
         icon: Cpu,
         color: "text-emerald-400",
         bg: "bg-emerald-500/10",
@@ -91,7 +91,7 @@ const items: ExploreItem[] = [
         category: "IoT",
         href: "/explore/iot-solar-panel",
         github: "https://github.com/Yudzyyy/solarpanelcleaner_iot",
-        tags: ["ESP8266", "Python", "React", "MQTT", "Docker"],
+        tags: ["ESP8266", "Python", "React", "Kubernetes", "MQTT"],
         featured: true,
     },
     {

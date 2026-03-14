@@ -1,6 +1,7 @@
 import SolarPanelDiagram from "@/components/projects/SolarPanelDiagram";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
+import ZoomableImage from "@/components/ui/ZoomableImage";
 
 export default function SolarPanelPage() {
     return (
@@ -143,6 +144,63 @@ export default function SolarPanelPage() {
                     <p className="text-muted-foreground leading-relaxed">
                         I designed the full-stack architecture, including the circuit schematics for the sensor nodes and the firmware logic for reliable data transmission under varying network conditions. I implemented the MQTT-based communication layer and developed the interactive web dashboard, which features custom SVG-based system architecture diagrams and real-time data visualization charts.
                     </p>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-mono font-bold uppercase tracking-tight text-primary">06. Kubernetes Integration & Value</h2>
+                    <div className="space-y-6 text-muted-foreground">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div className="rounded-xl border border-border p-6 bg-card/50">
+                                <h3 className="font-bold text-foreground mb-4">Struktur Sistem Kamu Sekarang</h3>
+                                <p className="mb-4">Secara arsitektur:</p>
+                                <ul className="space-y-1 mb-6 ml-4 border-l-2 border-primary/20 pl-4 font-mono text-sm">
+                                    <li>Browser</li>
+                                    <li className="text-primary pl-2">↓</li>
+                                    <li>Frontend (React Pod)</li>
+                                    <li className="text-primary pl-2">↓</li>
+                                    <li>Backend Service</li>
+                                    <li className="text-primary pl-2">↓</li>
+                                    <li>Backend Pod x3</li>
+                                    <li className="text-primary pl-2">↓</li>
+                                    <li>MQTT Broker</li>
+                                    <li className="text-primary pl-2">↓</li>
+                                    <li>ESP8266 Robot</li>
+                                    <li className="text-primary pl-2">↓</li>
+                                    <li>PostgreSQL</li>
+                                </ul>
+                                <p className="text-sm font-bold text-foreground bg-muted p-2 rounded-md">Semua berjalan di Kubernetes cluster lokal.</p>
+                            </div>
+
+                            <div className="rounded-xl border border-primary/20 p-6 bg-primary/5">
+                                <h3 className="font-bold text-primary mb-4 text-xl">Nilai Portfolio Kamu Sekarang</h3>
+                                <p className="mb-4">Project ini menunjukkan kamu mengerti:</p>
+                                <div className="flex flex-wrap gap-2 mb-6">
+                                    {['Containerization', 'Kubernetes orchestration', 'IoT communication (MQTT)', 'Websocket realtime system', 'Persistent storage', 'Horizontal scaling'].map(t => (
+                                        <span key={t} className="text-[12px] font-mono bg-primary/10 text-primary px-3 py-1.5 rounded uppercase border border-primary/20">{t}</span>
+                                    ))}
+                                </div>
+                                <p className="font-bold text-foreground mb-4 border-l-4 border-primary pl-3 py-1">Ini sangat kuat untuk posisi DevOps / Cloud / Platform Engineer.</p>
+                                
+                                <div className="bg-background/80 p-4 rounded-lg border border-border/50">
+                                    <p className="text-sm mb-3 text-foreground">💡 Jika kamu ingin menaikkan level portfolio ini menjadi benar-benar profesional, langkah berikutnya biasanya:</p>
+                                    <div className="space-y-2 text-sm font-mono ml-2 text-muted-foreground">
+                                        <p>1️⃣ Ingress Controller (akses domain seperti production)</p>
+                                        <p>2️⃣ Horizontal Pod Autoscaler (auto scale)</p>
+                                        <p>3️⃣ Monitoring (Prometheus + Grafana)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                            <div className="rounded-xl overflow-hidden border border-border bg-card">
+                                <ZoomableImage src="/images/kube1.png" alt="Kubernetes pods architecture" width={800} height={600} className="w-full h-auto object-cover" />
+                            </div>
+                            <div className="rounded-xl overflow-hidden border border-border bg-card">
+                                <ZoomableImage src="/images/kube2.png" alt="Kubernetes services architecture" width={800} height={600} className="w-full h-auto object-cover" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
