@@ -9,15 +9,14 @@ import {
     XCircle,
     Clock,
     Cloud,
-    Container,
-    Terminal,
     Zap,
     ShieldCheck,
     ExternalLink,
     Play,
-    Server,
     Code,
     ArrowDown,
+    Globe,
+    RefreshCw,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -65,9 +64,6 @@ const CodeBlock = ({ code, label }: { code: string; label?: string }) => (
             <pre className="text-emerald-400 overflow-x-auto whitespace-pre-wrap">
                 <code>{code}</code>
             </pre>
-            <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                <Terminal className="w-4 h-4 text-zinc-600" />
-            </div>
         </div>
     </div>
 );
@@ -83,7 +79,6 @@ const pipelineStages = [
         color: "text-purple-400",
         bg: "bg-purple-500/10",
         border: "border-purple-500/20",
-        status: "success",
     },
     {
         id: "checkout",
@@ -93,7 +88,6 @@ const pipelineStages = [
         color: "text-blue-400",
         bg: "bg-blue-500/10",
         border: "border-blue-500/20",
-        status: "success",
     },
     {
         id: "lint",
@@ -103,47 +97,33 @@ const pipelineStages = [
         color: "text-yellow-400",
         bg: "bg-yellow-500/10",
         border: "border-yellow-500/20",
-        status: "success",
     },
     {
         id: "build",
-        label: "Build",
+        label: "Build Check",
         sublabel: "npm run build",
         icon: Zap,
         color: "text-orange-400",
         bg: "bg-orange-500/10",
         border: "border-orange-500/20",
-        status: "success",
     },
     {
-        id: "ssh",
-        label: "SSH to EC2",
-        sublabel: "appleboy/ssh-action",
-        icon: Server,
-        color: "text-emerald-400",
-        bg: "bg-emerald-500/10",
-        border: "border-emerald-500/20",
-        status: "success",
-    },
-    {
-        id: "docker",
-        label: "Docker Build",
-        sublabel: "docker build -t ...",
-        icon: Container,
-        color: "text-blue-400",
-        bg: "bg-blue-500/10",
-        border: "border-blue-500/20",
-        status: "success",
+        id: "vercel",
+        label: "Vercel Deploy",
+        sublabel: "Auto-triggered by Vercel",
+        icon: Cloud,
+        color: "text-sky-400",
+        bg: "bg-sky-500/10",
+        border: "border-sky-500/20",
     },
     {
         id: "live",
         label: "Live 🚀",
         sublabel: "titiswahyudi.space",
-        icon: Cloud,
+        icon: Globe,
         color: "text-emerald-400",
         bg: "bg-emerald-500/10",
         border: "border-emerald-500/20",
-        status: "success",
     },
 ];
 
@@ -174,7 +154,7 @@ const PipelineVisualizer = () => {
                     <h3 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-1">
                         Pipeline Simulation
                     </h3>
-                    <p className="text-xs text-zinc-600">GitHub Actions → AWS EC2</p>
+                    <p className="text-xs text-zinc-600">GitHub Actions (CI) → Vercel (CD)</p>
                 </div>
                 <button
                     onClick={runPipeline}
@@ -196,9 +176,26 @@ const PipelineVisualizer = () => {
                     const isActive = activeStage === idx;
                     const isDone = completed.includes(idx);
                     const Icon = stage.icon;
+                    // Vercel step is separate from GitHub Actions
+                    const isVercelStep = stage.id === "vercel" || stage.id === "live";
 
                     return (
                         <React.Fragment key={stage.id}>
+                            {/* Divider label between CI and CD */}
+                            {stage.id === "vercel" && (
+                                <div className="flex items-center gap-3 w-full max-w-md my-1">
+                                    <div className="flex-1 h-px bg-border/30" />
+                                    <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">Vercel CD</span>
+                                    <div className="flex-1 h-px bg-border/30" />
+                                </div>
+                            )}
+                            {stage.id === "push" && (
+                                <div className="flex items-center gap-3 w-full max-w-md mb-1">
+                                    <div className="flex-1 h-px bg-border/30" />
+                                    <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">GitHub Actions CI</span>
+                                    <div className="flex-1 h-px bg-border/30" />
+                                </div>
+                            )}
                             <motion.div
                                 animate={{
                                     scale: isActive ? 1.04 : 1,
@@ -208,7 +205,10 @@ const PipelineVisualizer = () => {
                                         ? "rgba(16, 185, 129, 0.2)"
                                         : "rgba(255,255,255,0.05)",
                                 }}
-                                className="w-full max-w-md flex items-center gap-4 p-4 rounded-xl border bg-white/[0.02]"
+                                className={cn(
+                                    "w-full max-w-md flex items-center gap-4 p-4 rounded-xl border bg-white/[0.02]",
+                                    isVercelStep && "border-dashed"
+                                )}
                             >
                                 <div
                                     className={cn(
@@ -266,7 +266,7 @@ const PipelineVisualizer = () => {
                         className="mt-8 text-center"
                     >
                         <p className="text-emerald-400 font-bold text-sm font-mono">
-                            ✅ All jobs passed — deployed successfully!
+                            ✅ All checks passed — deployed to Vercel!
                         </p>
                     </motion.div>
                 )}
@@ -298,7 +298,7 @@ export default function CICDPipelinePage() {
                         animate={{ opacity: 1, y: 0 }}
                         className="space-y-3"
                     >
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-3 flex-wrap">
                             <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold uppercase tracking-widest">
                                 DevOps Project
                             </span>
@@ -308,10 +308,14 @@ export default function CICDPipelinePage() {
                             </span>
                         </div>
                         <h1 className="text-3xl md:text-5xl font-black tracking-tight max-w-3xl">
-                            GitHub Actions CI/CD Auto Deploy
+                            GitHub Actions CI + Vercel CD
                         </h1>
                         <p className="text-muted-foreground text-base max-w-2xl">
-                            Every push to <code className="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded text-sm">main</code> automatically lints, builds, and deploys this portfolio to AWS EC2 via Docker — zero manual steps.
+                            Every push to{" "}
+                            <code className="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded text-sm">
+                                main
+                            </code>{" "}
+                            triggers GitHub Actions to lint and validate, then Vercel automatically deploys the new version — zero manual steps.
                         </p>
                     </motion.div>
                 </div>
@@ -330,8 +334,8 @@ export default function CICDPipelinePage() {
                                     { id: "overview", label: "Overview", icon: Zap },
                                     { id: "pipeline", label: "Pipeline Simulation", icon: Play },
                                     { id: "workflow", label: "Workflow File", icon: GitBranch },
-                                    { id: "secrets", label: "GitHub Secrets", icon: ShieldCheck },
-                                    { id: "stack", label: "Tech Stack", icon: Container },
+                                    { id: "vercel", label: "Vercel Integration", icon: RefreshCw },
+                                    { id: "stack", label: "Tech Stack", icon: Cloud },
                                 ].map((item) => (
                                     <a
                                         key={item.id}
@@ -373,21 +377,40 @@ export default function CICDPipelinePage() {
                         {/* Overview */}
                         <Section id="overview" title="How It Works" icon={Zap}>
                             <p className="text-muted-foreground leading-relaxed mb-6">
-                                This portfolio uses a fully automated CI/CD pipeline powered by <strong>GitHub Actions</strong>. When code is pushed to the <code className="text-emerald-400 bg-emerald-500/10 px-1 rounded">main</code> branch, the pipeline automatically:
+                                This portfolio uses a split CI/CD strategy. <strong>GitHub Actions</strong> handles the <em>Continuous Integration</em> (validating code quality), while <strong>Vercel</strong> handles the <em>Continuous Deployment</em> (building and serving the app globally).
                             </p>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                                 {[
-                                    { step: "1", title: "Validate", desc: "Runs ESLint and builds the Next.js app to catch errors before deployment.", icon: ShieldCheck, color: "text-yellow-400", bg: "bg-yellow-500/10", border: "border-yellow-500/20" },
-                                    { step: "2", title: "Deploy", desc: "SSHs into the AWS EC2 instance and pulls the latest code from GitHub.", icon: Server, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
-                                    { step: "3", title: "Containerize", desc: "Rebuilds the Docker image and starts a new container with zero downtime.", icon: Container, color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
-                                ].map((item) => (
-                                    <div key={item.step} className={cn("p-5 rounded-2xl border", item.bg, item.border)}>
-                                        <div className={cn("w-8 h-8 rounded-lg flex items-center justify-center mb-3", item.bg, "border", item.border)}>
-                                            <item.icon className={cn("w-4 h-4", item.color)} />
+                                    {
+                                        label: "CI — GitHub Actions",
+                                        color: "text-purple-400",
+                                        bg: "bg-purple-500/10",
+                                        border: "border-purple-500/20",
+                                        icon: GitBranch,
+                                        items: ["Checkout code", "Install dependencies", "Run ESLint", "Build validation"],
+                                    },
+                                    {
+                                        label: "CD — Vercel",
+                                        color: "text-sky-400",
+                                        bg: "bg-sky-500/10",
+                                        border: "border-sky-500/20",
+                                        icon: Cloud,
+                                        items: ["Detects push to main", "Optimized Next.js build", "Global CDN deployment", "Preview URLs for PRs"],
+                                    },
+                                ].map((col) => (
+                                    <div key={col.label} className={cn("p-5 rounded-2xl border", col.bg, col.border)}>
+                                        <div className="flex items-center gap-2 mb-4">
+                                            <col.icon className={cn("w-4 h-4", col.color)} />
+                                            <span className="font-bold text-sm">{col.label}</span>
                                         </div>
-                                        <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Step {item.step}</div>
-                                        <h4 className="font-bold mb-2">{item.title}</h4>
-                                        <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                                        <ul className="space-y-2">
+                                            {col.items.map((item) => (
+                                                <li key={item} className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
                                     </div>
                                 ))}
                             </div>
@@ -396,19 +419,22 @@ export default function CICDPipelinePage() {
                         {/* Pipeline Visualizer */}
                         <Section id="pipeline" title="Pipeline Simulation" icon={Play}>
                             <p className="text-muted-foreground text-sm mb-6">
-                                Click <strong>Run Pipeline</strong> below to simulate the exact flow that runs on every <code className="text-purple-400 bg-purple-500/10 px-1 rounded">git push</code> to main.
+                                Click <strong>Run Pipeline</strong> to simulate the full flow. The first 4 steps run on GitHub Actions; the last 2 are handled automatically by Vercel.
                             </p>
                             <PipelineVisualizer />
                         </Section>
 
                         {/* Workflow File */}
-                        <Section id="workflow" title="Workflow Configuration" icon={GitBranch}>
+                        <Section id="workflow" title="GitHub Actions Workflow" icon={GitBranch}>
                             <p className="text-muted-foreground text-sm mb-4">
-                                The pipeline is defined in a single YAML file at <code className="text-blue-400 bg-blue-500/10 px-1 rounded">.github/workflows/ci-cd.yml</code>. It has two jobs: <strong>validate</strong> (always runs) and <strong>deploy</strong> (only after validate passes on main).
+                                The CI workflow is defined at{" "}
+                                <code className="text-blue-400 bg-blue-500/10 px-1 rounded">
+                                    .github/workflows/ci-cd.yml
+                                </code>. It runs on every push and pull request to <code className="text-emerald-400 bg-emerald-500/10 px-1 rounded">main</code>, catching lint errors and build failures <em>before</em> Vercel deploys.
                             </p>
                             <CodeBlock
                                 label=".github/workflows/ci-cd.yml"
-                                code={`name: CI/CD — Portfolio Deploy
+                                code={`name: CI — Lint & Build Check
 
 on:
   push:
@@ -420,59 +446,45 @@ jobs:
   validate:
     name: Lint & Build Check
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run build
 
-  deploy:
-    name: Deploy to AWS EC2
-    runs-on: ubuntu-latest
-    needs: validate
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: \${{ secrets.EC2_HOST }}
-          username: \${{ secrets.EC2_USER }}
-          key: \${{ secrets.EC2_SSH_KEY }}
-          script: |
-            cd ~/titisportofolio
-            git pull origin main
-            docker stop titisportofolio || true
-            docker rm titisportofolio || true
-            docker build -t titisportofolio .
-            docker run -d -p 3000:3000 \\
-              --name titisportofolio \\
-              --restart unless-stopped \\
-              titisportofolio`}
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Build Next.js app
+        run: npm run build`}
                             />
                         </Section>
 
-                        {/* Secrets */}
-                        <Section id="secrets" title="GitHub Secrets Setup" icon={ShieldCheck}>
+                        {/* Vercel */}
+                        <Section id="vercel" title="Vercel Auto Deployment" icon={RefreshCw}>
                             <p className="text-muted-foreground text-sm mb-6">
-                                Sensitive credentials are stored as encrypted GitHub Secrets under <strong>Settings → Secrets and Variables → Actions</strong>. They are never exposed in logs.
+                                Vercel is connected directly to the GitHub repository. Once a push lands on <code className="text-emerald-400 bg-emerald-500/10 px-1 rounded">main</code>, Vercel automatically picks it up, runs an optimized Next.js build, and deploys it globally via its edge CDN.
                             </p>
                             <div className="space-y-3">
                                 {[
-                                    { key: "EC2_HOST", desc: "Public IP or domain of the AWS EC2 instance", example: "13.xxx.xxx.xxx" },
-                                    { key: "EC2_USER", desc: "SSH username for the server", example: "ubuntu" },
-                                    { key: "EC2_SSH_KEY", desc: "Private RSA key (.pem) for passwordless SSH authentication", example: "-----BEGIN RSA PRIVATE KEY-----..." },
-                                ].map((s) => (
-                                    <div key={s.key} className="flex flex-col md:flex-row md:items-center gap-3 p-4 rounded-xl border border-border/50 bg-card/50">
-                                        <code className="text-xs bg-zinc-900 text-emerald-400 px-3 py-1.5 rounded-lg font-mono font-bold shrink-0 w-fit">
-                                            {s.key}
-                                        </code>
-                                        <div className="flex-1">
-                                            <p className="text-sm text-muted-foreground">{s.desc}</p>
-                                            <p className="text-xs text-zinc-600 font-mono mt-0.5">{s.example}</p>
+                                    { title: "Automatic Deployments", desc: "Every push to main triggers a production deployment with zero configuration." },
+                                    { title: "Preview Deployments", desc: "Every pull request gets its own unique preview URL for review before merging." },
+                                    { title: "Zero Config Next.js", desc: "Vercel is built by the Next.js team — it understands the framework natively and optimizes accordingly." },
+                                    { title: "Global Edge CDN", desc: "Assets are served from the edge closest to each visitor for maximum performance." },
+                                ].map((item, i) => (
+                                    <div key={i} className="flex gap-4 p-4 rounded-xl border border-border/50 bg-card/50">
+                                        <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
+                                        <div>
+                                            <div className="font-bold text-sm mb-0.5">{item.title}</div>
+                                            <div className="text-xs text-muted-foreground">{item.desc}</div>
                                         </div>
                                     </div>
                                 ))}
@@ -480,15 +492,15 @@ jobs:
                         </Section>
 
                         {/* Tech Stack */}
-                        <Section id="stack" title="Full Tech Stack" icon={Container}>
+                        <Section id="stack" title="Tech Stack" icon={Cloud}>
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                                 {[
-                                    { name: "GitHub Actions", role: "CI/CD Runner", icon: GitBranch },
-                                    { name: "AWS EC2", role: "Cloud Server", icon: Cloud },
-                                    { name: "Docker", role: "Containerization", icon: Container },
-                                    { name: "Nginx", role: "Reverse Proxy", icon: Server },
+                                    { name: "GitHub Actions", role: "CI Runner", icon: GitBranch },
+                                    { name: "Vercel", role: "CD Platform", icon: Cloud },
                                     { name: "Next.js 15", role: "Application", icon: Code },
-                                    { name: "Let's Encrypt", role: "SSL / HTTPS", icon: ShieldCheck },
+                                    { name: "ESLint", role: "Code Quality", icon: ShieldCheck },
+                                    { name: "Node.js 20", role: "Runtime", icon: Zap },
+                                    { name: "GitHub", role: "Source Control", icon: GitBranch },
                                 ].map((tech) => (
                                     <div key={tech.name} className="flex items-center gap-3 p-4 rounded-xl border border-border/50 bg-card/50">
                                         <tech.icon className="w-4 h-4 text-primary shrink-0" />
@@ -504,10 +516,12 @@ jobs:
                         {/* Footer CTA */}
                         <div className="mt-16 pt-10 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-6">
                             <div>
-                                <span className="text-xs uppercase tracking-widest text-muted-foreground mb-1 block">Want to see it in action?</span>
-                                <h4 className="text-xl font-bold">Check the live GitHub workflow</h4>
+                                <span className="text-xs uppercase tracking-widest text-muted-foreground mb-1 block">
+                                    See it in action
+                                </span>
+                                <h4 className="text-xl font-bold">Check the live GitHub workflow runs</h4>
                             </div>
-                            <div className="flex gap-4">
+                            <div className="flex gap-4 flex-wrap">
                                 <a
                                     href="https://github.com/Yudzyyy/titisportofolio/actions"
                                     target="_blank"
