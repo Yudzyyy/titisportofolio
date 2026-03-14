@@ -7,7 +7,7 @@ export default function SolarPanelPage() {
         <div className="container mx-auto py-12 px-4 md:px-6">
             {/* Breadcrumbs */}
             <Link
-                href="/project"
+                href="/explore"
                 className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8"
             >
                 <ArrowLeft size={16} />
@@ -148,3 +148,4 @@ export default function SolarPanelPage() {
         </div>
     );
 }
+
